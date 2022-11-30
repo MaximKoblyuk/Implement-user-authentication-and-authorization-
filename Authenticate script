@@ -1,0 +1,92 @@
+ Connect-AzureAD
+ 
+ 
+ Run the following command to retrieve and display the primary Domain Name System (DNS) domain name of the Azure AD tenant:
+ $aadDomainName = ((Get-AzureAdTenantDetail).VerifiedDomains)[0].Name
+$aadDomainName
+
+$passwordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
+$passwordProfile.Password = 'Pa55w.rd1234'
+$passwordProfile.ForceChangePasswordNextLogin = $false
+New-AzureADUser -AccountEnabled $true -DisplayName 'aad_lab_user1' -PasswordProfile $passwordProfile -MailNickName 'aad_lab_user1' -UserPrincipalName "aad_lab_user1@$aadDomainName" 
+
+
+
+(Get-AzureADUser -Filter "MailNickName eq 'aad_lab_user1'").UserPrincipalName
+
+
+
+
+F:
+cd F:\Allfiles\file name
+
+
+dotnet new mvc --auth SingleOrg --client-id <application_ID> --tenant-id <tenant_ID> --domain <domain_Name>
+rmdir .\obj /S /Q
+
+
+
+
+
+Verify that the content of the OIDCClient.csproj file resembles the following listing (the value of the UserSecretsIdwill differ) and save the changes.
+
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <UserSecretsId>aspnet-OIDCClient-737DEB13-25D4-4C52-93C5-F485367E3C8C</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" NoWarn="NU1605" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.9" NoWarn="NU1605" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="1.25.3" />
+    <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.25.3" />
+  </ItemGroup>
+</Project>
+
+
+///////////////////////////
+<a class="nav-link text-dark" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignOut">Sign out</a>
+
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.UI;
+
+
+
+
+builder.services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+  .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"));
+  
+  
+  
+  
+  builder.services.AddRazorPages()
+  .AddMicrosoftIdentityUI();
+  
+  
+  
+  ///////////////////////////////////////
+  
+  
+
+cd F:\Allfiles\file name
+
+dotnet build
+
+
+
+dotnet dev-certs https --trust
+
+
+dotnet run
+
+
+
+
+
+
+
+
+
+
